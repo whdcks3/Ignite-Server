@@ -1,4 +1,4 @@
-package ignit.api.config;
+package ignite.api.config;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

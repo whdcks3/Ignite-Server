@@ -1,4 +1,4 @@
-package ignit.api.controller;
+package ignite.api.controller;
 
 public class ReviewRestController {
 

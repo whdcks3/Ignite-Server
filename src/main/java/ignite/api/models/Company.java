@@ -1,4 +1,4 @@
-package ignit.api.models;
+package ignite.api.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
-import ignit.api.config.BaseEntity;
+import ignite.api.config.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
