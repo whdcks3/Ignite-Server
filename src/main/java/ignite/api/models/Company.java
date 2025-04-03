@@ -39,5 +39,5 @@ public class Company extends BaseEntity {
     private String bankAccount;
 
     @Column(columnDefinition = "TEXT")
-    private String introduction;
+    private String content;
 }
