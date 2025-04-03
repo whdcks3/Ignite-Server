@@ -19,7 +19,6 @@ public class Purchase extends BaseEntity {
 
     private String purchaser;
     private String phone;
-    private LocalDateTime time;
     private int payment;
     private String payMethod;
 
