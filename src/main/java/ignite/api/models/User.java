@@ -3,10 +3,13 @@ package ignite.api.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import ignite.api.config.BaseEntity;
 import lombok.AllArgsConstructor;
@@ -22,15 +25,24 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User extends BaseEntity {
 
-    @NotBlank
+    @Column(nullable = false, length = 30)
     private String name;
 
     @Email
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
 
+    @Column(nullable = false)
     private String phone;
 
+    @Column
     private String image;
+
+    @Column(nullable = false)
+    private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Community> communities = new ArrayList<>();
 
     private List<String> favoriteCategory = new ArrayList<>();
 

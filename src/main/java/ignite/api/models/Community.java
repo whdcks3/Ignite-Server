@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import ignite.api.config.BaseEntity;
@@ -19,6 +21,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Community extends BaseEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "user_pid")
+    private User user;
 
     private List<String> category = new ArrayList<>();
 
