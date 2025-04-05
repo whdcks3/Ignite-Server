@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -42,8 +44,12 @@ public class User extends BaseEntity {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    private List<Purchase> purchases = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
     private List<Community> communities = new ArrayList<>();
 
+    @Enumerated(EnumType.STRING)
     private List<String> favoriteCategory = new ArrayList<>();
 
     public void update() {
