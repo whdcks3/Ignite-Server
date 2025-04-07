@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -14,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import ignite.api.config.BaseEntity;
+import ignite.api.models.community.Community;
+import ignite.api.models.enums.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,14 +46,14 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Purchase> purchases = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Community> communities = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
-    private List<String> favoriteCategory = new ArrayList<>();
+    private List<Category> favoriteCategory = new ArrayList<>();
 
     public void update() {
     }
