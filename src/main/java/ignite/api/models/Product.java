@@ -1,24 +1,45 @@
 package ignite.api.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ignite.api.config.BaseEntity;
+import ignite.api.models.enums.ProductType;
+import ignite.api.models.requests.ProductRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product extends BaseEntity {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_pid")
+    private Company company;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ProductType productType;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductSchedule> schedules = new ArrayList<>();
 
     @Column(nullable = false, length = 50)
     private String name;
@@ -31,16 +52,15 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "company_pid")
-    private Company company;
-
-    private String kakaoAdress;
-
     @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(nullable = false)
     private String address;
+
+    public Product(Company company, ProductRequest req) {
+        setCompany(company);
+
+    }
 
 }

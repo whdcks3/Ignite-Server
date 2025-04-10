@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 import ignite.api.config.BaseEntity;
 import ignite.api.models.community.Community;
 import ignite.api.models.enums.Category;
+import ignite.api.models.enums.SocialType;
+import ignite.api.models.requests.RegisterRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,10 +43,13 @@ public class User extends BaseEntity {
     private String phone;
 
     @Column
-    private String image;
+    private String profileImgUrl;
 
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Purchase> purchases = new ArrayList<>();
@@ -53,8 +58,14 @@ public class User extends BaseEntity {
     private List<Community> communities = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
-    private List<Category> favoriteCategory = new ArrayList<>();
+    private List<Category> favoriteCategories = new ArrayList<>();
 
-    public void update() {
+    public User(RegisterRequest req) {
+        setName(req.getName());
+        setEmail(req.getEmail());
+        setPhone(req.getPhone());
+        setSocialType(req.getSocialType());
+        setProfileImgUrl(req.getImage());
+        setFavoriteCategories(req.getCategories());
     }
 }
