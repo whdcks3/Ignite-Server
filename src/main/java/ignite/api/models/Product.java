@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ignite.api.config.BaseEntity;
+import ignite.api.models.enums.Category;
 import ignite.api.models.enums.ProductType;
 import ignite.api.models.requests.ProductRequest;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,8 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private ProductType productType;
 
+    private List<Category> productCategories = new ArrayList<>();
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductSchedule> schedules = new ArrayList<>();
 
@@ -60,6 +63,13 @@ public class Product extends BaseEntity {
 
     public Product(Company company, ProductRequest req) {
         setCompany(company);
+        setProductType(req.getProductType());
+        setProductCategories(req.getCategories());
+        setSchedules(schedules); // To Do
+        setName(req.getName());
+        setRegularPrice(req.getRegularPrice());
+        setDiscountPrice(req.getDiscountPrice());
+        setContent(req.getContent());
 
     }
 
