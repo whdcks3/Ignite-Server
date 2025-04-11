@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import ignite.api.config.BaseEntity;
+import ignite.api.models.Dto.ProductScheduleDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +20,7 @@ import lombok.Setter;
 @Table(name = "schedule")
 @Getter
 @Setter
+@AllArgsConstructor
 public class ProductSchedule extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,4 +33,13 @@ public class ProductSchedule extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
+
+    public ProductSchedule(Product product, ProductScheduleDto dto) {
+        this.product = product;
+        this.startTime = dto.getStartTime();
+        this.endTime = dto.getEndTime();
+        this.regularPrice = dto.getRegularPrice();
+        this.discountPrice = dto.getDiscountPrice();
+        this.dayOfWeek = dto.getDayOfWeek();
+    }
 }

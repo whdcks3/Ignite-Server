@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import ignite.api.config.BaseEntity;
 import ignite.api.models.enums.ReservationStatus;
+import ignite.api.models.requests.ProductRequest;
+import ignite.api.models.requests.PurchaseRequest;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +29,7 @@ import lombok.Setter;
 public class Purchase extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_pid")
+    @JoinColumn(name = "user_id")
     private User customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -67,5 +69,17 @@ public class Purchase extends BaseEntity {
     private List<String> cancelImgUrls = new ArrayList<>();
 
     private boolean isRefunded;
+
+    public Purchase(User user, Product product, PurchaseRequest req) {
+        setName(req.getName());
+        setPurchaser(req.getPurchaser());
+        setPayMethod(req.getPayMethod());
+        setPayment(req.getPayment());
+        setStartTime(req.getStartTime());
+        setEndTime(req.getEndTime());
+        setDayOfWeek(req.getDayOfWeek());
+        setRegularPrice(req.getRegularPrice());
+        setDiscountPrice(req.getDiscountPrice());
+    }
 
 }

@@ -2,6 +2,8 @@ package ignite.api.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import ignite.api.config.BaseEntity;
+import ignite.api.models.Dto.ProductScheduleDto;
 import ignite.api.models.enums.Category;
 import ignite.api.models.enums.ProductType;
 import ignite.api.models.requests.ProductRequest;
@@ -32,7 +35,7 @@ import lombok.Setter;
 public class Product extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_pid")
+    @JoinColumn(name = "company_id")
     private Company company;
 
     @Enumerated(EnumType.STRING)
@@ -65,7 +68,10 @@ public class Product extends BaseEntity {
         setCompany(company);
         setProductType(req.getProductType());
         setProductCategories(req.getCategories());
-        setSchedules(schedules); // To Do
+        for (ProductScheduleDto dto : req.getSchedules()) {
+            ProductSchedule schedule = new ProductSchedule(this, dto);
+            schedules.add(schedule);
+        }
         setName(req.getName());
         setRegularPrice(req.getRegularPrice());
         setDiscountPrice(req.getDiscountPrice());
