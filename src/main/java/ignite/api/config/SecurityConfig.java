@@ -15,9 +15,9 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) {
-        http.cors().and().csrf().disable()
+    // @Bean
+    // public SecurityFilterChain filterChain(HttpSecurity http) {
+    // http.cors().and().csrf().disable()
 
-    }
+    // }
 }

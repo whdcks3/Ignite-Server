@@ -13,7 +13,12 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 @MappedSuperclass
+@Getter
+@NoArgsConstructor
 public abstract class BaseEntity implements Serializable {
 
     @Id
