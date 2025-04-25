@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import ignite.api.models.Purchase;
 
 @Repository
-public interface PurchaseRepository extends JpaRepository<Long, Purchase> {
+public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import ignite.api.models.Review;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Long, Review> {
-
+public interface ReviewRepository extends JpaRepository<Review, Long> {
+    
 }
